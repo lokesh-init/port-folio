@@ -7,6 +7,45 @@
     <body>
         <h>Enna ma kannu, sowkiyama?</h>
         <h1><centre>Lokesh Selvaraj</centre></h1>
-        <h2> Naa ennalam panni iruken nu paarunga prends!</h2>
-    </body>
+        <h2> Naa ennalam panni iruken nu paarunga prends</h2>
+
+         <body>
+  <form id="myForm" onsubmit="return validateForm()">
+    <div class="field">
+      <label for="name">Name:</label><br>
+      <input id="name" name="name" required>
+    </div>
+
+    <div class="field">
+      <label id="captchaLabel"></label><br>
+      <input id="captchaAnswer" name="captchaAnswer" required>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    function newCaptcha() {
+      const a = Math.floor(Math.random() * 9) + 1;
+      const b = Math.floor(Math.random() * 9) + 1;
+      window._captchaResult = a + b;
+      document.getElementById('captchaLabel').textContent = `What is ${a} + ${b}?`;
+      document.getElementById('captchaAnswer').value = '';
+    }
+
+    function validateForm() {
+      const userAnswer = document.getElementById('captchaAnswer').value.trim();
+      if (parseInt(userAnswer, 10) !== window._captchaResult) {
+        alert('Captcha is incorrect. Please try again.');
+        newCaptcha();
+        return false;
+      }
+      // Captcha correct → open aprilFool.html
+      window.location.href = 'aprilFool.html';
+      return false;
+    }
+
+    newCaptcha();
+  </script>
+</body>
 </html>
